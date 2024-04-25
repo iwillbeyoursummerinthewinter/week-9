@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://use.typekit.net/rvf8mly.css">
+	<style type="text/css">
+	<title> 🙃 Smile Service Center 🙂</title>
+	<style>
+
+		font-family: "t26-carbon", monospace;
+		font-weight: 400;
+		font-style: normal;
+
+			body,p{margin:0; background: black;}
+			.ticker{positon: absolute;overflow: hidden;}
+			#ticker1{
+				left: 0px top: 3rem;
+				width: 2000px; height: 3rem;
+				font-size: 2rem; line-height:3.3rem;
+				background: black; color: yellow;
+			}
+
+			header {padding-bottom:0vw; position:relative;}
+			footer {padding-top: 10px; padding-bottom: 100px;}
+
+			html {font-family: "t26-carbon", monospace; font-size: 2rem; line-height: 1.3; word-break: keep-all;}
+	
+	</style>
+
+</head>
+<body style="background: yellow; overflow-x: hidden;">
+	<div id="ticker1" class="ticker" data-speed="1" data-gap="200">
+		<p style="position: absolute; margin: 0px;">
+		<span>It's time to have a SMILE ( ⌒ ∇ ⌒)</span>
+		<span>It's time to have a SMILE  ̀⁽ᵕ̈⁾ ́ </span>
+		<span>It's time to have a SMILE ( ⌒ ͜  ⌒ )</span>
+		<span>It's time to have a SMILE ·̑.̮·̑</span>
+		</p>
+
+		<nav>
+		<div class="wrap flex">
+	</nav>
+
+			<header id="smile">
+				<img src="blankface.png" style="absolute; top: 46%; left: 50%;">
+			</header>
+
+<script type="text/javascript">
+
+	bhTicker("ticker",2);
+
+function bhTicker(cl,speed) {
+	let t = document.getElementsByClassName(cl);
+	let ta = []; let ts=[]; let tg=[]; let tw=[];
+	let container,mover,text,textWidth;
+
+	for(let i=0; i<t.length; i++){
+		container = t[i];
+		mover = container.getElementsByTagName("p").item(0);
+		text = mover.getElementsByTagName("span").item(0);
+
+		// set
+		mover.style.position = "absolute";
+		mover.style.margin = "0 0 0 0";
+		mover.style.left = "0px";
+		mover.leftPosition = 0;
+		mover.style.width = text.childNodes.item(0).length + "em";	// stretch width
+		textWidth = text.offsetWidth;
+
+		let speed2 = t[i].dataset.speed;
+		if (textWidth > container.offsetWidth) {
+			if(speed2 == 1){speed2 = 2};
+			mover.style.width = textWidth * speed2 + "px";
+			
+			for(let k=0;k<speed2;k++){
+				mover.innerHTML += mover.innerHTML;	
+			}
+		}
+
+		tw.push(textWidth);
+		tg.push(t[i].dataset.gap);
+		ts.push(t[i].dataset.speed);
+		ta.push(mover);
+	}
+
+	let tickerAction = function() {
+		for(let j=0;j<ta.length;j++){
+			let speed = parseInt(ts[j]);
+			let gap = parseInt(tg[j]);
+			let tw2 = tw[j];
+
+			if (ta[j].leftPosition * -speed > tw2*speed) {
+				ta[j].leftPosition = -speed;
+			} else {
+				ta[j].leftPosition -= speed;
+			}
+
+			ta[j].style.left = (-gap + ta[j].leftPosition) + "px";
+		}
+		window.requestAnimationFrame(tickerAction);
+	};
+	tickerAction();
+}
+</script>
+
+
+	
+
+</body>
+</html>
